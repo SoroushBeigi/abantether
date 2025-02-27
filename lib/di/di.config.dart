@@ -18,6 +18,9 @@ import '../core/network/interceptors/pretty_logger.dart' as _i727;
 import '../core/network/interceptors/token_interceptor.dart' as _i500;
 import '../core/network/network_module.dart' as _i419;
 import '../features/auth/data/remote/auth_service.dart' as _i474;
+import '../features/auth/data/repositories/auth_repository_impl.dart' as _i570;
+import '../features/auth/domain/repositories/auth_repository.dart' as _i869;
+import '../features/auth/domain/usecases/login_usecase.dart' as _i406;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -46,6 +49,12 @@ _i174.GetIt $initGetIt(
       () => _i997.UserLocalDataSourceImpl());
   gh.lazySingleton<_i474.AuthService>(
       () => _i474.AuthService(gh<_i361.Dio>(instanceName: 'authDio')));
+  gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
+        gh<_i474.AuthService>(),
+        gh<_i539.UserLocalDataSource>(),
+      ));
+  gh.lazySingleton<_i406.LoginUseCase>(
+      () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
   return getIt;
 }
 

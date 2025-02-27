@@ -12,7 +12,7 @@ abstract class AuthService {
   factory AuthService(@Named('authDio') Dio dio) = _AuthService;
 
   @POST('/auth/login')
-  Future<AuthModel> login(@Body() Map<String, dynamic> body);
+  Future<HttpResponse<AuthModel>> login(@Body() Map<String, dynamic> body);
 
 }
 
