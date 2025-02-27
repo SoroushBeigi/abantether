@@ -43,3 +43,14 @@ class UnknownFailure extends Failure {
 class DatabaseFailure extends Failure {
   const DatabaseFailure() : super('Something went wrong with local database');
 }
+
+class NetworkFailure extends Failure {
+  const NetworkFailure() : super('Network error occurred');
+}
+
+class CustomFailure extends Failure{
+  final String message;
+
+   const CustomFailure(this.message) : super(message);
+  
+}

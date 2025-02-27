@@ -21,6 +21,7 @@ import '../features/auth/data/remote/auth_service.dart' as _i474;
 import '../features/auth/data/repositories/auth_repository_impl.dart' as _i570;
 import '../features/auth/domain/repositories/auth_repository.dart' as _i869;
 import '../features/auth/domain/usecases/login_usecase.dart' as _i406;
+import '../features/auth/presentation/cubit/auth_cubit.dart' as _i70;
 import '../features/splash/data/repositories/splash_repository_impl.dart'
     as _i1010;
 import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
@@ -66,6 +67,7 @@ _i174.GetIt $initGetIt(
       () => _i371.SplashCubit(gh<_i482.GetTokenUsecase>()));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
+  gh.factory<_i70.AuthCubit>(() => _i70.AuthCubit(gh<_i406.LoginUseCase>()));
   return getIt;
 }
 

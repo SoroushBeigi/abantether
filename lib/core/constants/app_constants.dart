@@ -7,3 +7,6 @@ const String homePath = '/home';
 const String authPath = '/auth';
 const String splashPath = '/';
 
+const String inputErrorCode = 'ERROR_CODE_INPUT_ERROR';
+const String accessDeniedErrorCode = 'ERROR_CODE_ACCESS_DENIED';
+
