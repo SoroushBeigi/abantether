@@ -1,6 +1,9 @@
+import 'package:abantether/di/di.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
