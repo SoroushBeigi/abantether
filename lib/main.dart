@@ -1,10 +1,18 @@
+import 'package:abantether/core/data_sources/user_local_data_source.dart';
 import 'package:abantether/di/di.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  final token = await getToken();
   runApp(const MyApp());
+}
+
+Future<String?> getToken() async {
+  await getIt<UserLocalDataSource>().init();
+  final token = await getIt<UserLocalDataSource>().readToken();
+  return token.authToken;
 }
 
 class MyApp extends StatelessWidget {
