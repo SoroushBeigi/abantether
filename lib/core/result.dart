@@ -39,3 +39,7 @@ class ClientFailure extends Failure {
 class UnknownFailure extends Failure {
   const UnknownFailure() : super('Unknown error occurred');
 }
+
+class DatabaseFailure extends Failure {
+  const DatabaseFailure() : super('Something went wrong with local database');
+}

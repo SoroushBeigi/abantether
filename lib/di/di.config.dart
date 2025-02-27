@@ -21,6 +21,11 @@ import '../features/auth/data/remote/auth_service.dart' as _i474;
 import '../features/auth/data/repositories/auth_repository_impl.dart' as _i570;
 import '../features/auth/domain/repositories/auth_repository.dart' as _i869;
 import '../features/auth/domain/usecases/login_usecase.dart' as _i406;
+import '../features/splash/data/repositories/splash_repository_impl.dart'
+    as _i1010;
+import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
+import '../features/splash/domain/usecases/get_token_usecase.dart' as _i482;
+import '../features/splash/presentation/cubit/cubit/splash_cubit.dart' as _i371;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -47,12 +52,18 @@ _i174.GetIt $initGetIt(
   );
   gh.lazySingleton<_i539.UserLocalDataSource>(
       () => _i997.UserLocalDataSourceImpl());
+  gh.lazySingleton<_i103.SplashRepository>(
+      () => _i1010.SplashRepositoryImpl(gh<_i539.UserLocalDataSource>()));
   gh.lazySingleton<_i474.AuthService>(
       () => _i474.AuthService(gh<_i361.Dio>(instanceName: 'authDio')));
+  gh.lazySingleton<_i482.GetTokenUsecase>(
+      () => _i482.GetTokenUsecase(gh<_i103.SplashRepository>()));
   gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
         gh<_i474.AuthService>(),
         gh<_i539.UserLocalDataSource>(),
       ));
+  gh.factory<_i371.SplashCubit>(
+      () => _i371.SplashCubit(gh<_i482.GetTokenUsecase>()));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
   return getIt;
