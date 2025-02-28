@@ -6,6 +6,7 @@ const bool isReleaseMode = false;
 const String homePath = '/home';
 const String authPath = '/auth';
 const String splashPath = '/';
+const String profilePath = '/home/profile';
 
 const String appName = 'Aban Tether';
 

@@ -1,0 +1,19 @@
+import 'package:abantether/features/auth/data/models/auth_model.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
+
+part 'profile_service.g.dart';
+
+@RestApi()
+@lazySingleton
+abstract class ProfileService {
+  @factoryMethod
+  factory ProfileService(@Named('authDio') Dio dio) = _ProfileService;
+
+  @GET('/auth/me')
+  Future<HttpResponse<AuthModel>> getUserInfo();
+
+  @PUT('/auth/me/{id}')
+  Future<void> removeFav(@Path('id') String id, @Body() Map<String, dynamic> body);
+}
