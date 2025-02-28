@@ -32,6 +32,10 @@ import '../features/home/domain/usecases/get_favs_usecase.dart' as _i457;
 import '../features/home/domain/usecases/remove_fav_usecase.dart' as _i524;
 import '../features/home/presentation/cubit/home_cubit.dart' as _i1017;
 import '../features/profile/data/remote/profile_service.dart' as _i581;
+import '../features/profile/data/repositories/profile_repository_impl.dart'
+    as _i13;
+import '../features/profile/domain/repositories/profile_repository.dart'
+    as _i386;
 import '../features/splash/data/repositories/splash_repository_impl.dart'
     as _i1010;
 import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
@@ -83,6 +87,8 @@ _i174.GetIt $initGetIt(
       () => _i524.RemoveFavUsecase(gh<_i66.HomeRepository>()));
   gh.lazySingleton<_i482.GetTokenUsecase>(
       () => _i482.GetTokenUsecase(gh<_i103.SplashRepository>()));
+  gh.lazySingleton<_i386.ProfileRepository>(
+      () => _i13.ProfileRepositoryImpl(gh<_i581.ProfileService>()));
   gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
         gh<_i474.AuthService>(),
         gh<_i539.UserLocalDataSource>(),

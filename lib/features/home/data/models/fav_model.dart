@@ -22,6 +22,6 @@ class FavModel {
       'id': id,
       'cryptocurrency_id': cryptoId,
       'user_id': userId,
-    } as Map<String, dynamic>;
+    };
   }
 }

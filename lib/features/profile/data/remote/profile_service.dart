@@ -1,4 +1,5 @@
 import 'package:abantether/features/auth/data/models/auth_model.dart';
+import 'package:abantether/features/profile/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -12,8 +13,8 @@ abstract class ProfileService {
   factory ProfileService(@Named('authDio') Dio dio) = _ProfileService;
 
   @GET('/auth/me')
-  Future<HttpResponse<AuthModel>> getUserInfo();
+  Future<HttpResponse<UserModel>> getUserInfo();
 
-  @PUT('/auth/me/{id}')
-  Future<void> removeFav(@Path('id') String id, @Body() Map<String, dynamic> body);
+  @PUT('/user/{id}')
+  Future<HttpResponse<UserModel>> updateUser(@Path('id') String id, @Body() Map<String, dynamic> body);
 }
