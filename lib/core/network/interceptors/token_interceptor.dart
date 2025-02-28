@@ -13,7 +13,7 @@ class DioTokenInterceptor extends Interceptor {
     final resultToken = await _userDataSource.readToken();
     if (resultToken.authToken?.isNotEmpty ?? false) {
       final List<MapEntry<String, dynamic>> tokenHeader = [
-        MapEntry('Token', resultToken.authToken),
+        MapEntry('Authorization','Bearer ${resultToken.authToken}'),
       ];
       options.headers.addEntries(tokenHeader);
     }
