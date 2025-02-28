@@ -20,7 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
  @override
 Future<Result<Auth>> login(LoginCredentials credentials) async {
   try {
-    final result = await _service.login(credentials.toJson());
+    final result = await _service.login(credentials.toModel().toJson());
     
     final authModel = AuthModel.fromJson(result.response.data);
     await _localDataSource.writeToken(authModel.toEntity());

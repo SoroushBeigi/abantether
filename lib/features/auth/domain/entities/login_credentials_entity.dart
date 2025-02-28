@@ -1,3 +1,5 @@
+import 'package:abantether/features/auth/data/models/login_dto.dart';
+
 class LoginCredentials {
   String email;
   String password;
@@ -9,5 +11,5 @@ class LoginCredentials {
 }
 
 extension AuthEntityMapper on LoginCredentials {
-  Map<String,dynamic> toJson() => {'email':email,'password':password};
+  LoginDto toModel() => LoginDto(email: email, password: password);
 }
