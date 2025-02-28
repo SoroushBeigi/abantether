@@ -5,6 +5,7 @@ import 'package:abantether/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -31,7 +32,7 @@ class _HomeScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
+            child: IconButton(onPressed: () =>context.go(profilePath), icon: const Icon(Icons.person)),
           )
         ],
       ),

@@ -4,7 +4,7 @@ class UpdateUser{
   final int? id;
   final String? phoneNumber;
 
-  UpdateUser({this.id,this.phoneNumber});
+  const UpdateUser({this.id,this.phoneNumber});
 
 }
 

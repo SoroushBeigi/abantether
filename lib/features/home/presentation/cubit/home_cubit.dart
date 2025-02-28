@@ -45,7 +45,6 @@ class HomeCubit extends Cubit<HomeState> {
       final removeFavResult = await _removeFavUsecase(RemoveFav(favId: favId));
       removeFavResult.fold(
         onSuccess: (data) {
-          print('success');
           final updatedCoins = coins.map((e) => e.id == coinId ? e.copyWith(isFavorite: false) : e).toList();
           emit(currentState.copyWith(loadingCoinId: null, coins: updatedCoins));
         },

@@ -1,6 +1,7 @@
 import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/features/auth/presentation/auth_screen.dart';
 import 'package:abantether/features/home/presentation/home_screen.dart';
+import 'package:abantether/features/profile/presentation/profile_screen.dart';
 import 'package:abantether/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +44,22 @@ final router = GoRouter(
         return CustomTransitionPage(
           key: state.pageKey,
           child: const AuthScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+
+    GoRoute(
+      path: profilePath,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const ProfileScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),

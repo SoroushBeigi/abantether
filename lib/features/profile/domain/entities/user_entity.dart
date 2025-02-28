@@ -4,10 +4,17 @@ class User {
   final String? email;
   final String? phoneNumber;
 
-  User({
+  const User({
     this.id,
     this.name,
     this.email,
     this.phoneNumber,
   });
+
+  User copyWith({required String phoneNumber}) => User(
+        id: id,
+        email: email,
+        phoneNumber: phoneNumber,
+        name: name,
+      );
 }

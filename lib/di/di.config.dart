@@ -36,6 +36,9 @@ import '../features/profile/data/repositories/profile_repository_impl.dart'
     as _i13;
 import '../features/profile/domain/repositories/profile_repository.dart'
     as _i386;
+import '../features/profile/domain/usecases/get_user_usecase.dart' as _i773;
+import '../features/profile/domain/usecases/update_user_usecase.dart' as _i982;
+import '../features/profile/presentation/cubit/profile_cubit.dart' as _i300;
 import '../features/splash/data/repositories/splash_repository_impl.dart'
     as _i1010;
 import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
@@ -100,6 +103,14 @@ _i174.GetIt $initGetIt(
         gh<_i376.AddFavUsecase>(),
         gh<_i524.RemoveFavUsecase>(),
         gh<_i457.GetFavsUsecase>(),
+      ));
+  gh.lazySingleton<_i773.GetUserUsecase>(
+      () => _i773.GetUserUsecase(gh<_i386.ProfileRepository>()));
+  gh.lazySingleton<_i982.UpdateUserUsecase>(
+      () => _i982.UpdateUserUsecase(gh<_i386.ProfileRepository>()));
+  gh.factory<_i300.ProfileCubit>(() => _i300.ProfileCubit(
+        gh<_i773.GetUserUsecase>(),
+        gh<_i982.UpdateUserUsecase>(),
       ));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
