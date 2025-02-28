@@ -20,7 +20,7 @@ mixin _$HomeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coin> coins) success,
+    required TResult Function(List<Coin> coins, int? loadingCoinId) success,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$HomeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Coin> coins)? success,
+    TResult? Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult? Function(String? error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$HomeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coin> coins)? success,
+    TResult Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -131,7 +131,7 @@ class _$HomeInitialImpl implements _HomeInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coin> coins) success,
+    required TResult Function(List<Coin> coins, int? loadingCoinId) success,
     required TResult Function(String? error) error,
   }) {
     return initial();
@@ -142,7 +142,7 @@ class _$HomeInitialImpl implements _HomeInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Coin> coins)? success,
+    TResult? Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult? Function(String? error)? error,
   }) {
     return initial?.call();
@@ -153,7 +153,7 @@ class _$HomeInitialImpl implements _HomeInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coin> coins)? success,
+    TResult Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -248,7 +248,7 @@ class _$HomeLoadingImpl implements _HomeLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coin> coins) success,
+    required TResult Function(List<Coin> coins, int? loadingCoinId) success,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -259,7 +259,7 @@ class _$HomeLoadingImpl implements _HomeLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Coin> coins)? success,
+    TResult? Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult? Function(String? error)? error,
   }) {
     return loading?.call();
@@ -270,7 +270,7 @@ class _$HomeLoadingImpl implements _HomeLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coin> coins)? success,
+    TResult Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -328,7 +328,7 @@ abstract class _$$HomeSuccessImplCopyWith<$Res> {
           _$HomeSuccessImpl value, $Res Function(_$HomeSuccessImpl) then) =
       __$$HomeSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Coin> coins});
+  $Res call({List<Coin> coins, int? loadingCoinId});
 }
 
 /// @nodoc
@@ -345,12 +345,17 @@ class __$$HomeSuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? coins = null,
+    Object? loadingCoinId = freezed,
   }) {
     return _then(_$HomeSuccessImpl(
       coins: null == coins
           ? _value._coins
           : coins // ignore: cast_nullable_to_non_nullable
               as List<Coin>,
+      loadingCoinId: freezed == loadingCoinId
+          ? _value.loadingCoinId
+          : loadingCoinId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -358,7 +363,8 @@ class __$$HomeSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeSuccessImpl implements _HomeSuccess {
-  const _$HomeSuccessImpl({required final List<Coin> coins}) : _coins = coins;
+  const _$HomeSuccessImpl({required final List<Coin> coins, this.loadingCoinId})
+      : _coins = coins;
 
   final List<Coin> _coins;
   @override
@@ -369,8 +375,11 @@ class _$HomeSuccessImpl implements _HomeSuccess {
   }
 
   @override
+  final int? loadingCoinId;
+
+  @override
   String toString() {
-    return 'HomeState.success(coins: $coins)';
+    return 'HomeState.success(coins: $coins, loadingCoinId: $loadingCoinId)';
   }
 
   @override
@@ -378,12 +387,14 @@ class _$HomeSuccessImpl implements _HomeSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeSuccessImpl &&
-            const DeepCollectionEquality().equals(other._coins, _coins));
+            const DeepCollectionEquality().equals(other._coins, _coins) &&
+            (identical(other.loadingCoinId, loadingCoinId) ||
+                other.loadingCoinId == loadingCoinId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_coins));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_coins), loadingCoinId);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -398,10 +409,10 @@ class _$HomeSuccessImpl implements _HomeSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coin> coins) success,
+    required TResult Function(List<Coin> coins, int? loadingCoinId) success,
     required TResult Function(String? error) error,
   }) {
-    return success(coins);
+    return success(coins, loadingCoinId);
   }
 
   @override
@@ -409,10 +420,10 @@ class _$HomeSuccessImpl implements _HomeSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Coin> coins)? success,
+    TResult? Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult? Function(String? error)? error,
   }) {
-    return success?.call(coins);
+    return success?.call(coins, loadingCoinId);
   }
 
   @override
@@ -420,12 +431,12 @@ class _$HomeSuccessImpl implements _HomeSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coin> coins)? success,
+    TResult Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(coins);
+      return success(coins, loadingCoinId);
     }
     return orElse();
   }
@@ -469,10 +480,12 @@ class _$HomeSuccessImpl implements _HomeSuccess {
 }
 
 abstract class _HomeSuccess implements HomeState {
-  const factory _HomeSuccess({required final List<Coin> coins}) =
-      _$HomeSuccessImpl;
+  const factory _HomeSuccess(
+      {required final List<Coin> coins,
+      final int? loadingCoinId}) = _$HomeSuccessImpl;
 
   List<Coin> get coins;
+  int? get loadingCoinId;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -551,7 +564,7 @@ class _$HomeErrorImpl implements _HomeError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coin> coins) success,
+    required TResult Function(List<Coin> coins, int? loadingCoinId) success,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -562,7 +575,7 @@ class _$HomeErrorImpl implements _HomeError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Coin> coins)? success,
+    TResult? Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult? Function(String? error)? error,
   }) {
     return error?.call(this.error);
@@ -573,7 +586,7 @@ class _$HomeErrorImpl implements _HomeError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coin> coins)? success,
+    TResult Function(List<Coin> coins, int? loadingCoinId)? success,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {

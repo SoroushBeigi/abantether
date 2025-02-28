@@ -98,21 +98,8 @@ class HomeRepositoryImpl extends HomeRepository {
     try {
       final result = await _service.removeFav(removeFav.toDto().favId?.toString() ?? '');
       return Success(result);
-    } on DioException catch (e) {
-      if (e.response != null) {
-        final statusCode = e.response!.statusCode;
-        final data = e.response!.data;
-        if (data is Map<String, dynamic> && (data['message'] != null)) {
-          return Error(CustomFailure(data['message']));
-        }
-        if (statusCode! >= 500) {
-          return const Error(ServerFailure());
-        }
-        if (statusCode >= 400) {
-          return const Error(ClientFailure());
-        }
-      }
-      return const Error(NetworkFailure());
+    } on DioException catch (_) {
+      return const Success(null);
     } catch (e) {
       return const Error(UnknownFailure());
     }

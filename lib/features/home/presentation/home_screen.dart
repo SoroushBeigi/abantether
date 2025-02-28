@@ -45,7 +45,7 @@ class _HomeScreen extends StatelessWidget {
               final cubit = context.read<HomeCubit>();
 
               return state.whenOrNull(
-                    success: (coins) => coins.isEmpty
+                    success: (coins, loadingId) => coins.isEmpty
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -54,7 +54,7 @@ class _HomeScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
-                              ElevatedButton(onPressed: () => cubit.loadCoins(), child: const Text(retryStr))
+                              ElevatedButton(onPressed: () => cubit.loadCoinsAndFavs(), child: const Text(retryStr))
                             ],
                           )
                         : ListView.builder(
@@ -99,11 +99,40 @@ class _HomeScreen extends StatelessWidget {
                                                     .toStringAsFixed(3)
                                                     .splitPriceByComma()
                                                     .addPriceTag(),
-                                                    textAlign: TextAlign.center,
+                                                textAlign: TextAlign.center,
                                                 style: Theme.of(context).textTheme.titleLarge,
                                               ),
                                             ),
-                                            IconButton(onPressed: (){}, icon: Icon(Icons.favorite))
+                                            SizedBox(
+                                              height: 25,
+                                              width: 25,
+                                              child: Center(
+                                                child: loadingId == coins[index].id
+                                                    ? const SizedBox(
+                                                        width: 20,
+                                                        height: 20,
+                                                        child: CircularProgressIndicator(strokeWidth: 2),
+                                                      )
+                                                    : GestureDetector(
+                                                        onTap: loadingId != null
+                                                            ? null
+                                                            : () => cubit.toggleLike(
+                                                                  coinId: coins[index].id ?? -1,
+                                                                  isLiked: coins[index].isFavorite ?? false,
+                                                                ),
+                                                        child: Icon(
+                                                          coins[index].isFavorite==true
+                                                              ? Icons.favorite
+                                                              : Icons.favorite_border,
+                                                          size: 20,
+                                                          color: loadingId != null ? Colors.grey : Colors.red,
+                                                        ),
+                                                      ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 16,
+                                            ),
                                           ],
                                         )
                                       ],
