@@ -14,7 +14,7 @@ class SubmitButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: disabled(state) ? null : cubit.submit,
         child: state.status == LoginStatus.submitting
-            ? const SizedBox(height: 20, width: 20, child: const CircularProgressIndicator())
+            ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator())
             : const Text('Sign In'),
       ),
     );

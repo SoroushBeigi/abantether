@@ -49,8 +49,6 @@ class NetworkFailure extends Failure {
 }
 
 class CustomFailure extends Failure{
-  final String message;
-
-   const CustomFailure(this.message) : super(message);
+   const CustomFailure(super.message);
   
 }

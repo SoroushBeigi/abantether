@@ -22,14 +22,13 @@ class AuthScreen extends StatelessWidget {
 }
 
 class _AuthScreen extends StatelessWidget {
-  const _AuthScreen({super.key});
+  const _AuthScreen();
 
   @override
   Widget build(BuildContext context) {
-    final isSmallScreen = MediaQuery.of(context).size.width < 600;
+    final isSmallScreen = MediaQuery.sizeOf(context).width < 600;
 
     return Scaffold(
-      backgroundColor: Colors.blue,
       body: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 500),

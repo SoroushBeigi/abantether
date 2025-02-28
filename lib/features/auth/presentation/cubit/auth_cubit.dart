@@ -1,5 +1,3 @@
-import 'package:abantether/core/constants/auth_error_constants.dart';
-import 'package:abantether/core/result.dart';
 import 'package:abantether/features/auth/domain/entities/login_credentials_entity.dart';
 import 'package:abantether/features/auth/domain/usecases/login_usecase.dart';
 import 'package:abantether/features/auth/domain/validators/auth_validator.dart';

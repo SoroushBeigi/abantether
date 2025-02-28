@@ -30,7 +30,6 @@ Future<Result<Auth>> login(LoginCredentials credentials) async {
     if (e.response != null) {
       final statusCode = e.response!.statusCode;
       final data = e.response!.data;
-      print(data is Map<String, dynamic>);
       if (data is Map<String, dynamic> && (data['code'] == accessDeniedErrorCode)) {
         return Error(CustomFailure(data['message']));
       }
