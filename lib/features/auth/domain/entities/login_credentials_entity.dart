@@ -1,10 +1,10 @@
 import 'package:abantether/features/auth/data/models/login_dto.dart';
 
 class LoginCredentials {
-  String email;
-  String password;
+  final String email;
+  final String password;
   
-  LoginCredentials({
+  const LoginCredentials({
     required this.email,
     required this.password,
   });

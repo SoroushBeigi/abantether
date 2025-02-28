@@ -1,6 +1,6 @@
 class AuthModel {
-  String? authToken;
-  AuthModel({this.authToken});
+  final String? authToken;
+  const AuthModel({this.authToken});
 
    factory AuthModel.fromJson(Map<String, dynamic> json) {
     return AuthModel(

@@ -23,6 +23,8 @@ import '../features/auth/domain/repositories/auth_repository.dart' as _i869;
 import '../features/auth/domain/usecases/login_usecase.dart' as _i406;
 import '../features/auth/presentation/cubit/auth_cubit.dart' as _i70;
 import '../features/home/data/remote/home_service.dart' as _i14;
+import '../features/home/data/repositories/home_repository_impl.dart' as _i6;
+import '../features/home/domain/repositories/home_repository.dart' as _i66;
 import '../features/splash/data/repositories/splash_repository_impl.dart'
     as _i1010;
 import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
@@ -56,6 +58,8 @@ _i174.GetIt $initGetIt(
       () => _i14.HomeService(gh<_i361.Dio>(instanceName: 'coinsDio')));
   gh.lazySingleton<_i539.UserLocalDataSource>(
       () => _i997.UserLocalDataSourceImpl());
+  gh.lazySingleton<_i66.HomeRepository>(
+      () => _i6.HomeRepositoryImpl(gh<_i14.HomeService>()));
   gh.lazySingleton<_i103.SplashRepository>(
       () => _i1010.SplashRepositoryImpl(gh<_i539.UserLocalDataSource>()));
   gh.lazySingleton<_i474.AuthService>(

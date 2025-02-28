@@ -1,4 +1,4 @@
 class Auth {
   final String? authToken;
-  Auth({required this.authToken});
+  const Auth({required this.authToken});
 }

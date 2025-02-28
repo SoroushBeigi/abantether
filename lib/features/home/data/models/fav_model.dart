@@ -1,9 +1,9 @@
 class FavModel {
-  int? id;
-  int? cryptoId;
-  int? userId;
+  final int? id;
+  final int? cryptoId;
+  final int? userId;
   
-  FavModel({
+  const FavModel({
     this.id,
     this.cryptoId,
     this.userId,

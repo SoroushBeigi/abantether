@@ -1,8 +1,6 @@
-import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/core/data_sources/user_local_data_source.dart';
 import 'package:abantether/core/result.dart';
 import 'package:abantether/features/auth/data/mappers/auth_mapper.dart';
-import 'package:abantether/features/auth/data/models/auth_model.dart';
 import 'package:abantether/features/auth/data/remote/auth_service.dart';
 import 'package:abantether/features/auth/domain/entities/auth.dart';
 import 'package:abantether/features/auth/domain/entities/login_credentials_entity.dart';
@@ -21,8 +19,7 @@ class AuthRepositoryImpl extends AuthRepository {
 Future<Result<Auth>> login(LoginCredentials credentials) async {
   try {
     final result = await _service.login(credentials.toModel().toJson());
-    
-    final authModel = AuthModel.fromJson(result.response.data);
+    final authModel = result.data;
     await _localDataSource.writeToken(authModel.toEntity());
     return Success(authModel.toEntity());
     
@@ -30,7 +27,7 @@ Future<Result<Auth>> login(LoginCredentials credentials) async {
     if (e.response != null) {
       final statusCode = e.response!.statusCode;
       final data = e.response!.data;
-      if (data is Map<String, dynamic> && (data['code'] == accessDeniedErrorCode)) {
+      if (data is Map<String, dynamic> && (data['message'] !=null)) {
         return Error(CustomFailure(data['message']));
       }
       if (statusCode! >= 500) {

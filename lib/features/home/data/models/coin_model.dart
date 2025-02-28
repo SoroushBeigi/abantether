@@ -1,12 +1,12 @@
 class CoinModel {
-  int? id;
-  String? name;
-  double? price;
-  String? symbol;
-  String? iconAddress;
-  bool? isFavorite;
+  final int? id;
+  final String? name;
+  final double? price;
+  final String? symbol;
+  final String? iconAddress;
+  final bool? isFavorite;
 
-  CoinModel({
+  const CoinModel({
     this.id,
     this.name,
     this.price,

@@ -1,4 +1,3 @@
-import 'package:abantether/features/auth/data/models/auth_model.dart';
 import 'package:abantether/features/home/data/models/coin_model.dart';
 import 'package:abantether/features/home/data/models/fav_model.dart';
 import 'package:dio/dio.dart';
