@@ -6,3 +6,9 @@ const bool isReleaseMode = false;
 const String homePath = '/home';
 const String authPath = '/auth';
 const String splashPath = '/';
+
+const String appName = 'Aban Tether';
+
+const String noCoinsFound = 'No coins found!\nTry again?';
+const String retryStr = 'Retry';
+const String unknownCoin = 'Unknown Coin';

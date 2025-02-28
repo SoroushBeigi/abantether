@@ -1,3 +1,4 @@
+import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/core/result.dart';
 import 'package:abantether/di/di.dart';
 import 'package:abantether/features/splash/presentation/cubit/cubit/splash_cubit.dart';
@@ -47,7 +48,7 @@ class _SplashScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'Aban Tether',
+                appName,
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,

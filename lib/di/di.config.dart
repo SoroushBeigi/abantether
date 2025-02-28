@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -25,6 +26,11 @@ import '../features/auth/presentation/cubit/auth_cubit.dart' as _i70;
 import '../features/home/data/remote/home_service.dart' as _i14;
 import '../features/home/data/repositories/home_repository_impl.dart' as _i6;
 import '../features/home/domain/repositories/home_repository.dart' as _i66;
+import '../features/home/domain/usecases/add_fav_usecase.dart' as _i376;
+import '../features/home/domain/usecases/get_coins_usecase.dart' as _i918;
+import '../features/home/domain/usecases/get_favs_usecase.dart' as _i457;
+import '../features/home/domain/usecases/remove_fav_usecase.dart' as _i524;
+import '../features/home/presentation/cubit/home_cubit.dart' as _i1017;
 import '../features/splash/data/repositories/splash_repository_impl.dart'
     as _i1010;
 import '../features/splash/domain/repositories/splash_repository.dart' as _i103;
@@ -64,6 +70,14 @@ _i174.GetIt $initGetIt(
       () => _i1010.SplashRepositoryImpl(gh<_i539.UserLocalDataSource>()));
   gh.lazySingleton<_i474.AuthService>(
       () => _i474.AuthService(gh<_i361.Dio>(instanceName: 'authDio')));
+  gh.lazySingleton<_i376.AddFavUsecase>(
+      () => _i376.AddFavUsecase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i918.GetCoinsUsecase>(
+      () => _i918.GetCoinsUsecase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i457.GetFavsUsecase>(
+      () => _i457.GetFavsUsecase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i524.RemoveFavUsecase>(
+      () => _i524.RemoveFavUsecase(gh<_i66.HomeRepository>()));
   gh.lazySingleton<_i482.GetTokenUsecase>(
       () => _i482.GetTokenUsecase(gh<_i103.SplashRepository>()));
   gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
@@ -72,6 +86,12 @@ _i174.GetIt $initGetIt(
       ));
   gh.factory<_i371.SplashCubit>(
       () => _i371.SplashCubit(gh<_i482.GetTokenUsecase>()));
+  gh.factory<_i1017.HomeCubit>(() => _i1017.HomeCubit(
+        gh<_i918.GetCoinsUsecase>(),
+        gh<_i376.AddFavUsecase>(),
+        gh<_i524.RemoveFavUsecase>(),
+        gh<_i457.GetFavsUsecase>(),
+      ));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
   gh.factory<_i70.AuthCubit>(() => _i70.AuthCubit(gh<_i406.LoginUseCase>()));
