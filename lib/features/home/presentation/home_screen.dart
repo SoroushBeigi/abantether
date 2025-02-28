@@ -93,6 +93,7 @@ class _HomeScreen extends StatelessWidget {
                                         const SizedBox(height: 8),
                                         Row(
                                           children: [
+                                            const SizedBox(width: 24),
                                             Expanded(
                                               child: Text(
                                                 (coins[index].price ?? 0)
