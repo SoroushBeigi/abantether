@@ -8,6 +8,7 @@ import 'package:abantether/features/auth/presentation/widgets/submit_button.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -48,34 +49,37 @@ class _AuthScreen extends StatelessWidget {
               final cubit = context.read<AuthCubit>();
 
               return AutofillGroup(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Welcome Back',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: 32),
-                    EmailInput(cubit: cubit, state: state),
-                    const SizedBox(height: 16),
-                    PasswordInput(cubit: cubit, state: state),
-                    const SizedBox(height: 24),
-                    SubmitButton(cubit: cubit, state: state),
-                
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don't have an account?"),
-                        TextButton(
-                          onPressed: () {
-                            //Mock button, no signup feature
-                          },
-                          child: const Text('Sign Up'),
-                        ),
-                      ],
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.asset('assets/lottie/login.json',height: MediaQuery.sizeOf(context).height*0.3),
+                      Text(
+                        'Welcome Back',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: 32),
+                      EmailInput(cubit: cubit, state: state),
+                      const SizedBox(height: 16),
+                      PasswordInput(cubit: cubit, state: state),
+                      const SizedBox(height: 24),
+                      SubmitButton(cubit: cubit, state: state),
+                  
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don't have an account?"),
+                          TextButton(
+                            onPressed: () {
+                              //Mock button, no signup feature
+                            },
+                            child: const Text('Sign Up'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
