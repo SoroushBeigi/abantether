@@ -5,8 +5,8 @@ import 'package:abantether/features/splash/domain/repositories/splash_repository
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class GetTokenUsecase extends BaseUseCaseNoArgs<Result<Auth>> {
-  GetTokenUsecase(this._splashRepository);
+class GetTokenUseCase extends BaseUseCaseNoArgs<Result<Auth>> {
+  GetTokenUseCase(this._splashRepository);
 
   final SplashRepository _splashRepository;
 

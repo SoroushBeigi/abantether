@@ -1,4 +1,3 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -10,11 +9,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../core/data_sources/user_local_data_source.dart' as _i539;
-import '../core/data_sources/user_local_data_source_impl.dart' as _i997;
+import '../core/data_sources/local/key_value_data_source.dart' as _i377;
+import '../core/data_sources/local/secure_storage_data_source.dart' as _i305;
 import '../core/network/interceptors/pretty_logger.dart' as _i727;
 import '../core/network/interceptors/token_interceptor.dart' as _i500;
 import '../core/network/network_module.dart' as _i419;
@@ -70,12 +70,10 @@ _i174.GetIt $initGetIt(
   );
   gh.lazySingleton<_i14.HomeService>(
       () => _i14.HomeService(gh<_i361.Dio>(instanceName: 'coinsDio')));
-  gh.lazySingleton<_i539.UserLocalDataSource>(
-      () => _i997.UserLocalDataSourceImpl());
   gh.lazySingleton<_i66.HomeRepository>(
       () => _i6.HomeRepositoryImpl(gh<_i14.HomeService>()));
-  gh.lazySingleton<_i103.SplashRepository>(
-      () => _i1010.SplashRepositoryImpl(gh<_i539.UserLocalDataSource>()));
+  gh.lazySingleton<_i377.KeyValueLocalDataSource>(
+      () => _i305.SecureStorageDataSource(gh<_i558.FlutterSecureStorage>()));
   gh.lazySingleton<_i474.AuthService>(
       () => _i474.AuthService(gh<_i361.Dio>(instanceName: 'authDio')));
   gh.lazySingleton<_i581.ProfileService>(
@@ -88,16 +86,14 @@ _i174.GetIt $initGetIt(
       () => _i457.GetFavsUsecase(gh<_i66.HomeRepository>()));
   gh.lazySingleton<_i524.RemoveFavUsecase>(
       () => _i524.RemoveFavUsecase(gh<_i66.HomeRepository>()));
-  gh.lazySingleton<_i482.GetTokenUsecase>(
-      () => _i482.GetTokenUsecase(gh<_i103.SplashRepository>()));
   gh.lazySingleton<_i386.ProfileRepository>(
       () => _i13.ProfileRepositoryImpl(gh<_i581.ProfileService>()));
+  gh.lazySingleton<_i103.SplashRepository>(
+      () => _i1010.SplashRepositoryImpl(gh<_i377.KeyValueLocalDataSource>()));
   gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
         gh<_i474.AuthService>(),
-        gh<_i539.UserLocalDataSource>(),
+        gh<_i377.KeyValueLocalDataSource>(),
       ));
-  gh.factory<_i371.SplashCubit>(
-      () => _i371.SplashCubit(gh<_i482.GetTokenUsecase>()));
   gh.factory<_i1017.HomeCubit>(() => _i1017.HomeCubit(
         gh<_i918.GetCoinsUsecase>(),
         gh<_i376.AddFavUsecase>(),
@@ -108,6 +104,10 @@ _i174.GetIt $initGetIt(
       () => _i773.GetUserUsecase(gh<_i386.ProfileRepository>()));
   gh.lazySingleton<_i982.UpdateUserUsecase>(
       () => _i982.UpdateUserUsecase(gh<_i386.ProfileRepository>()));
+  gh.lazySingleton<_i482.GetTokenUseCase>(
+      () => _i482.GetTokenUseCase(gh<_i103.SplashRepository>()));
+  gh.factory<_i371.SplashCubit>(
+      () => _i371.SplashCubit(gh<_i482.GetTokenUseCase>()));
   gh.factory<_i300.ProfileCubit>(() => _i300.ProfileCubit(
         gh<_i773.GetUserUsecase>(),
         gh<_i982.UpdateUserUsecase>(),

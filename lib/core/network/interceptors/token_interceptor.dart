@@ -1,19 +1,20 @@
-import 'package:abantether/core/data_sources/user_local_data_source.dart';
+import 'package:abantether/core/constants/app_constants.dart';
+import 'package:abantether/core/data_sources/local/key_value_data_source.dart';
 import 'package:abantether/di/di.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 class DioTokenInterceptor extends Interceptor {
   @singleton
-  UserLocalDataSource get _userDataSource => getIt<UserLocalDataSource>();
+  KeyValueLocalDataSource get _userDataSource => getIt<KeyValueLocalDataSource>();
 
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    final resultToken = await _userDataSource.readToken();
-    if (resultToken.authToken?.isNotEmpty ?? false) {
+    final authToken = await _userDataSource.read<String>(key: tokenLocalKey);
+    if (authToken?.isNotEmpty ?? false) {
       final List<MapEntry<String, dynamic>> tokenHeader = [
-        MapEntry('Authorization','Bearer ${resultToken.authToken}'),
+        MapEntry('Authorization','Bearer $authToken'),
       ];
       options.headers.addEntries(tokenHeader);
     }

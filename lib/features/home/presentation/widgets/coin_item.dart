@@ -28,13 +28,14 @@ class CoinItem extends StatelessWidget {
           height: 100,
           child: Stack(
             children: [
+              if(coin.iconAddress?.isNotEmpty??false)
               Center(
                 child: Opacity(
                   opacity: 0.2,
                   child: SvgPicture.network(
                     height: 90,
                     width: 90,
-                    coin.iconAddress ?? '',
+                    coin.iconAddress!,
                     placeholderBuilder: (context) => const SizedBox(
                         height: 90,
                         width: 90,

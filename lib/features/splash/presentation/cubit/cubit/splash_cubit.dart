@@ -8,15 +8,15 @@ part 'splash_cubit.freezed.dart';
 
 @injectable
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit(this._getTokenUsecase) : super(const SplashState.initial()) {
+  SplashCubit(this._getTokenUseCase) : super(const SplashState.initial()) {
     Future.microtask(() => navigate());
   }
 
-  final GetTokenUsecase _getTokenUsecase;
+  final GetTokenUseCase _getTokenUseCase;
 
   Future<void> navigate() async {
     await Future.delayed(const Duration(seconds: 2));
-    final auth = await _getTokenUsecase();
+    final auth = await _getTokenUseCase();
     auth.fold(
       onSuccess: (data) {
         if (data.authToken?.isNotEmpty ?? false) {

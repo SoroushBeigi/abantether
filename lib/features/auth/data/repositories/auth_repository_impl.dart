@@ -1,4 +1,5 @@
-import 'package:abantether/core/data_sources/user_local_data_source.dart';
+import 'package:abantether/core/constants/app_constants.dart';
+import 'package:abantether/core/data_sources/local/key_value_data_source.dart';
 import 'package:abantether/core/result.dart';
 import 'package:abantether/features/auth/data/mappers/auth_mapper.dart';
 import 'package:abantether/features/auth/data/remote/auth_service.dart';
@@ -11,7 +12,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   final AuthService _service;
-  final UserLocalDataSource _localDataSource;
+  final KeyValueLocalDataSource _localDataSource;
 
   AuthRepositoryImpl(this._service, this._localDataSource);
 
@@ -20,7 +21,7 @@ Future<Result<Auth>> login(LoginCredentials credentials) async {
   try {
     final result = await _service.login(credentials.toModel().toJson());
     final authModel = result.data;
-    await _localDataSource.writeToken(authModel.toEntity());
+    await _localDataSource.write(key: tokenLocalKey,value: authModel.toEntity().authToken);
     return Success(authModel.toEntity());
     
   } on DioException catch (e) {

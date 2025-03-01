@@ -1,10 +1,16 @@
 import 'package:abantether/di/di.dart';
 import 'package:abantether/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  const secureStorage = FlutterSecureStorage();
+
+  getIt.registerLazySingleton<FlutterSecureStorage>(() => secureStorage);
   configureDependencies();
+
   runApp(const MyApp());
 }
 
