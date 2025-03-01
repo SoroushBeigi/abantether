@@ -10,14 +10,23 @@ void main() {
 
     test('Invalid email format returns error', () {
       expect(AuthValidator.validateEmail('invalid-email'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('@domain.com'), AuthErrors.invalidEmail);
       expect(AuthValidator.validateEmail('user@'), AuthErrors.invalidEmail);
       expect(AuthValidator.validateEmail('user@domain.'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('user@domain'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('user@.com'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('user@-domain.com'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('user@domain!com'), AuthErrors.invalidEmail);
+      expect(AuthValidator.validateEmail('us@do@main.com'), AuthErrors.invalidEmail);
     });
 
     test('Valid email returns null', () {
       expect(AuthValidator.validateEmail('valid@example.com'), null);
       expect(AuthValidator.validateEmail('r.shakiba@abantether.com'), null);
       expect(AuthValidator.validateEmail('sbeygi712@gmail.com'), null);
+      expect(AuthValidator.validateEmail('first.last@subdomain.domain.com'), null);
+      expect(AuthValidator.validateEmail('a@a.com'), null);
+      expect(AuthValidator.validateEmail('user@subdomain.domain.co.uk'), null);
     });
   });
 
