@@ -18,10 +18,10 @@
    ```git clone https://github.com/your-username/your-repo-name.git  
    cd abantether
  2. **Install dependencies:**:  
-   ```flutter pub get
+   ```flutter pub get```
 
  4. **Run the app:**:  
-   ```flutter run
+   ```flutter run```
 
 
 ## 🏗️ Architecture & State Management
