@@ -18,9 +18,11 @@
    ```git clone https://github.com/your-username/your-repo-name.git  
    cd abantether```
  2. **Install dependencies:**:  
-   ```flutter pub get```
- 3. **Run the app:**:  
-   ```flutter run```
+   ```flutter pub get
+```
+ 4. **Run the app:**:  
+   ```flutter run
+```
 
 ## 🏗️ Architecture & State Management
 This app follows **Clean Architecture** to enforce separation of concerns, scalability, and testability. Here’s the breakdown:  
