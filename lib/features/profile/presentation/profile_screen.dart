@@ -24,6 +24,7 @@ class _ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
     return Scaffold(
+      appBar: AppBar(title: const Text(profileTitle),),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Center(

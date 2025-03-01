@@ -2,6 +2,7 @@ import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/core/utils/extensions/string_extensions.dart';
 import 'package:abantether/di/di.dart';
 import 'package:abantether/features/home/presentation/cubit/home_cubit.dart';
+import 'package:abantether/features/home/presentation/widgets/coin_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,7 +33,9 @@ class _HomeScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: IconButton(onPressed: () =>context.go(profilePath), icon: const Icon(Icons.person)),
+            child: IconButton(
+                onPressed: () => context.push(profilePath),
+                icon: const Icon(Icons.person)),
           )
         ],
       ),
@@ -55,92 +58,21 @@ class _HomeScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
-                              ElevatedButton(onPressed: () => cubit.loadCoinsAndFavs(), child: const Text(retryStr))
+                              ElevatedButton(
+                                  onPressed: () => cubit.loadCoinsAndFavs(),
+                                  child: const Text(retryStr))
                             ],
                           )
                         : ListView.builder(
                             itemCount: coins.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Card(
-                                  borderOnForeground: true,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    height: 100,
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8),
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.network(
-                                                '${coins[index].iconAddress}',
-                                                height: 24,
-                                                width: 24,
-                                                placeholderBuilder: (context) => const SizedBox(
-                                                    height: 24, width: 24, child: Icon(Icons.currency_bitcoin)),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  '(${coins[index].symbol ?? ''}) ${coins[index].name ?? unknownCoin}',
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: Theme.of(context).textTheme.bodyLarge,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Row(
-                                          children: [
-                                            const SizedBox(width: 24),
-                                            Expanded(
-                                              child: Text(
-                                                (coins[index].price ?? 0)
-                                                    .toStringAsFixed(3)
-                                                    .splitPriceByComma()
-                                                    .addPriceTag(),
-                                                textAlign: TextAlign.center,
-                                                style: Theme.of(context).textTheme.titleLarge,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 25,
-                                              width: 25,
-                                              child: Center(
-                                                child: loadingId == coins[index].id
-                                                    ? const SizedBox(
-                                                        width: 20,
-                                                        height: 20,
-                                                        child: CircularProgressIndicator(strokeWidth: 2),
-                                                      )
-                                                    : GestureDetector(
-                                                        onTap: loadingId != null
-                                                            ? null
-                                                            : () => cubit.toggleLike(
-                                                                  coinId: coins[index].id ?? -1,
-                                                                  isLiked: coins[index].isFavorite ?? false,
-                                                                ),
-                                                        child: Icon(
-                                                          coins[index].isFavorite==true
-                                                              ? Icons.favorite
-                                                              : Icons.favorite_border,
-                                                          size: 20,
-                                                          color: loadingId != null ? Colors.grey : Colors.red,
-                                                        ),
-                                                      ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 16,
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                              return CoinItem(
+                                coin: coins[index],
+                                toggleLike: () => cubit.toggleLike(
+                                  coinId: coins[index].id ?? -1,
+                                  isLiked: coins[index].isFavorite ?? false,
                                 ),
+                                loadingId: loadingId,
                               );
                             },
                           ),
