@@ -1,8 +1,11 @@
 import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/di/di.dart';
 import 'package:abantether/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:abantether/features/profile/presentation/widgets/info_field.dart';
+import 'package:abantether/features/profile/presentation/widgets/phone_field.dart';
+import 'package:abantether/features/profile/presentation/widgets/profile_header.dart';
+import 'package:abantether/features/profile/presentation/widgets/save_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,52 +46,48 @@ class _ProfileScreen extends StatelessWidget {
                 child: BlocConsumer<ProfileCubit, ProfileState>(
                   listener: (context, state) {
                     state.whenOrNull(
-                      error: (error) =>
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(
-                              SnackBar(content: Text(error ?? ''))),
+                      error: (error) => ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(error ?? ''))),
                     );
                   },
                   builder: (context, state) {
                     return state.whenOrNull(
-                        loading: () =>
-                        const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        success: (user) {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              _buildProfileHeader(user.name ?? ''),
-                              const SizedBox(height: 32),
-                              _buildInfoField(
-                                label: nameLabel,
-                                value: user.name ?? '',
-                                icon: Icons.person_outline,
-                              ),
-                              const SizedBox(height: 24),
-                              _buildInfoField(
-                                label: emailLabel,
-                                value: user.email ?? '',
-                                icon: Icons.email_outlined,
-                              ),
-                              const SizedBox(height: 24),
-                              _buildEditablePhoneField(
-                                  phoneNumber: user.phoneNumber ?? '',
-                                  controller: phoneController),
-                              const SizedBox(height: 32),
-                              _buildSaveButton(
-                                  onPressed: () =>
-                                      cubit.updateUser(
-                                        id: user.id ?? -1,
-                                        phoneNumber: phoneController.text,
-                                      )),
-                            ],
-                          )
-                              .animate()
-                              .fade(duration: const Duration(seconds: 1));
-                        }
-                    ) ??
+                            loading: () => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                            success: (user) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ProfileHeader(name: user.name ?? ''),
+                                  const SizedBox(height: 32),
+                                  InfoField(
+                                    label: nameLabel,
+                                    value: user.name ?? '',
+                                    icon: Icons.person_outline,
+                                  ),
+                                  const SizedBox(height: 24),
+                                  InfoField(
+                                    label: emailLabel,
+                                    value: user.email ?? '',
+                                    icon: Icons.email_outlined,
+                                  ),
+                                  const SizedBox(height: 24),
+                                  PhoneField(
+                                      phoneNumber: user.phoneNumber ?? '',
+                                      controller: phoneController),
+                                  const SizedBox(height: 32),
+                                  SaveButton(
+                                    onPressed: () => cubit.updateUser(
+                                      id: user.id ?? -1,
+                                      phoneNumber: phoneController.text,
+                                    ),
+                                  ),
+                                ],
+                              )
+                                  .animate()
+                                  .fade(duration: const Duration(seconds: 1));
+                            }) ??
                         const SizedBox();
                   },
                 ),
@@ -96,115 +95,6 @@ class _ProfileScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildProfileHeader(String name) {
-    return Column(
-      children: [
-        Container(
-          width: 120,
-          height: 120,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.blue.shade100,
-          ),
-          child: Icon(
-            Icons.person,
-            size: 60,
-            color: Colors.blue.shade800,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildInfoField({
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
-    return TextFormField(
-      initialValue: value,
-      enabled: false,
-      style: TextStyle(
-        color: Colors.grey.shade600,
-      ),
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: Colors.grey),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Colors.grey.shade400,
-            width: 1.0,
-          ),
-        ),
-        contentPadding: const EdgeInsets.all(16),
-        filled: true,
-      ),
-    );
-  }
-
-  Widget _buildEditablePhoneField(
-      {String? phoneNumber, required TextEditingController controller}) {
-    controller.text = phoneNumber ?? '';
-    return TextFormField(
-      controller: controller,
-      enabled: true,
-      keyboardType: TextInputType.phone,
-      style: TextStyle(
-        color: Colors.grey.shade800,
-      ),
-      decoration: InputDecoration(
-        labelText: phoneLabel,
-        prefixIcon: const Icon(Icons.phone_iphone, color: Colors.grey),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Colors.grey.shade400,
-            width: 1.0,
-          ),
-        ),
-        contentPadding: const EdgeInsets.all(16),
-        suffixIcon: const Icon(Icons.edit, color: Colors.grey),
-        hintText: phoneHint,
-      ),
-    );
-  }
-
-  Widget _buildSaveButton({required void Function()? onPressed}) {
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue.shade800,
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
-      icon: const Icon(
-        Icons.save_outlined,
-        color: Colors.white,
-      ),
-      label: const Text(
-        saveChanges,
-        style: TextStyle(fontSize: 16, color: Colors.white),
       ),
     );
   }
