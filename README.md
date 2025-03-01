@@ -1,16 +1,20 @@
 # abantether
 
-A new Flutter project.
+## 🚀 Setup & Installation  
 
-## Getting Started
+### Prerequisites  
+- Flutter SDK installed ([Installation guide](https://docs.flutter.dev/get-started/install))  
+- Android Studio/Xcode (for emulators) or a physical device.  
+- Git (optional, for cloning the repository).  
 
-This project is a starting point for a Flutter application.
+### Option 1: Install via APK  
+1. Download the `app-release.apk` file from the repository files.  
+2. Transfer the APK to your Android device.  
+3. Enable **"Install from unknown sources"** in your device settings.  
+4. Open the APK file and follow the prompts to install.  
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Option 2: Build from Source  
+1. **Clone the repository**:  
+   ```bash  
+   git clone https://github.com/your-username/your-repo-name.git  
+   cd your-repo-name  
