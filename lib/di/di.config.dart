@@ -18,6 +18,7 @@ import '../core/data_sources/local/secure_storage_data_source.dart' as _i305;
 import '../core/network/interceptors/pretty_logger.dart' as _i727;
 import '../core/network/interceptors/token_interceptor.dart' as _i500;
 import '../core/network/network_module.dart' as _i419;
+import '../core/theme/theme_cubit.dart' as _i596;
 import '../features/auth/data/remote/auth_service.dart' as _i474;
 import '../features/auth/data/repositories/auth_repository_impl.dart' as _i570;
 import '../features/auth/domain/repositories/auth_repository.dart' as _i869;
@@ -60,6 +61,7 @@ _i174.GetIt $initGetIt(
   gh.singleton<_i500.DioTokenInterceptor>(
       () => networkModule.dioTokenInterceptor);
   gh.singleton<_i727.PrettyDioLogger>(() => networkModule.prettyDioLogger);
+  gh.singleton<_i596.ThemeCubit>(() => _i596.ThemeCubit());
   gh.singleton<_i361.Dio>(
     () => networkModule.authDio,
     instanceName: 'authDio',
@@ -106,14 +108,14 @@ _i174.GetIt $initGetIt(
       () => _i982.UpdateUserUsecase(gh<_i386.ProfileRepository>()));
   gh.lazySingleton<_i482.GetTokenUseCase>(
       () => _i482.GetTokenUseCase(gh<_i103.SplashRepository>()));
-  gh.factory<_i371.SplashCubit>(
-      () => _i371.SplashCubit(gh<_i482.GetTokenUseCase>()));
   gh.factory<_i300.ProfileCubit>(() => _i300.ProfileCubit(
         gh<_i773.GetUserUsecase>(),
         gh<_i982.UpdateUserUsecase>(),
       ));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
+  gh.factory<_i371.SplashCubit>(
+      () => _i371.SplashCubit(gh<_i482.GetTokenUseCase>()));
   gh.factory<_i70.AuthCubit>(() => _i70.AuthCubit(gh<_i406.LoginUseCase>()));
   return getIt;
 }

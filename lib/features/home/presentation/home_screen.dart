@@ -1,9 +1,11 @@
 import 'package:abantether/core/constants/app_constants.dart';
+import 'package:abantether/core/theme/widgets/theme_switch.dart';
 import 'package:abantether/core/utils/extensions/string_extensions.dart';
 import 'package:abantether/di/di.dart';
 import 'package:abantether/features/home/presentation/cubit/home_cubit.dart';
 import 'package:abantether/features/home/presentation/widgets/coin_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +28,6 @@ class _HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSmallScreen = MediaQuery.sizeOf(context).width < 600;
-    final cubit = context.read<HomeCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(appName),
@@ -36,7 +37,8 @@ class _HomeScreen extends StatelessWidget {
             child: IconButton(
                 onPressed: () => context.push(profilePath),
                 icon: const Icon(Icons.person)),
-          )
+          ),
+          const ThemeSwitchIcon(),
         ],
       ),
       body: Center(
@@ -75,7 +77,7 @@ class _HomeScreen extends StatelessWidget {
                                 loadingId: loadingId,
                               );
                             },
-                          ),
+                          ).animate().fade(duration: const Duration(seconds: 1)),
                   ) ??
                   const SizedBox();
             },

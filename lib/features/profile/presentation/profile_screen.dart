@@ -3,6 +3,7 @@ import 'package:abantether/di/di.dart';
 import 'package:abantether/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -42,16 +43,20 @@ class _ProfileScreen extends StatelessWidget {
                 child: BlocConsumer<ProfileCubit, ProfileState>(
                   listener: (context, state) {
                     state.whenOrNull(
-                      error: (error) => ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(error ?? ''))),
+                      error: (error) =>
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(
+                              SnackBar(content: Text(error ?? ''))),
                     );
                   },
                   builder: (context, state) {
                     return state.whenOrNull(
-                          loading: () => const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          success: (user) => Column(
+                        loading: () =>
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        success: (user) {
+                          return Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               _buildProfileHeader(user.name ?? ''),
@@ -73,13 +78,17 @@ class _ProfileScreen extends StatelessWidget {
                                   controller: phoneController),
                               const SizedBox(height: 32),
                               _buildSaveButton(
-                                  onPressed: () => cubit.updateUser(
+                                  onPressed: () =>
+                                      cubit.updateUser(
                                         id: user.id ?? -1,
                                         phoneNumber: phoneController.text,
                                       )),
                             ],
-                          ),
-                        ) ??
+                          )
+                              .animate()
+                              .fade(duration: const Duration(seconds: 1));
+                        }
+                    ) ??
                         const SizedBox();
                   },
                 ),
@@ -128,7 +137,7 @@ class _ProfileScreen extends StatelessWidget {
       initialValue: value,
       enabled: false,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.grey.shade600,
       ),
       decoration: InputDecoration(
         labelText: label,
@@ -145,7 +154,6 @@ class _ProfileScreen extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.all(16),
         filled: true,
-        fillColor: Colors.grey.shade100,
       ),
     );
   }
@@ -176,7 +184,6 @@ class _ProfileScreen extends StatelessWidget {
         contentPadding: const EdgeInsets.all(16),
         suffixIcon: const Icon(Icons.edit, color: Colors.grey),
         hintText: phoneHint,
-        fillColor: Colors.white,
       ),
     );
   }
@@ -186,7 +193,6 @@ class _ProfileScreen extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blue.shade800,
-        foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -198,7 +204,7 @@ class _ProfileScreen extends StatelessWidget {
       ),
       label: const Text(
         saveChanges,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 16, color: Colors.white),
       ),
     );
   }
