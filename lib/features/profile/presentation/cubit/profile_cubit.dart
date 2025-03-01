@@ -31,8 +31,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> updateUser({required int id, required String phoneNumber}) async {
+
     final String? validationError =ProfileValidator.validatePhoneNumber(phoneNumber);
     final currentState = state;
+
     if(validationError!=null){
       emit(ProfileState.error(error: validationError));
       emit(currentState);

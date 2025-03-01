@@ -26,3 +26,6 @@ const String phoneInvalidError = 'Invalid phone number';
 const String saveChanges = 'Save Changes';
 const String updateSuccess = 'Phone number updated successfully';
 const String editTooltip = 'Edit';
+
+const String loginLottiePath = 'assets/lottie/login.json';
+const String splashLottiePath = 'assets/lottie/splash.json';

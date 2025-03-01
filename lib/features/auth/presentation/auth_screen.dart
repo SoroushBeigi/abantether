@@ -1,5 +1,6 @@
 import 'package:abantether/core/constants/app_constants.dart';
 import 'package:abantether/core/result.dart';
+import 'package:abantether/core/theme/widgets/theme_switch.dart';
 import 'package:abantether/di/di.dart';
 import 'package:abantether/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:abantether/features/auth/presentation/widgets/email_input.dart';
@@ -53,7 +54,7 @@ class _AuthScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Lottie.asset('assets/lottie/login.json',height: MediaQuery.sizeOf(context).height*0.3),
+                      Lottie.asset(loginLottiePath,height: MediaQuery.sizeOf(context).height*0.3),
                       Text(
                         'Welcome Back',
                         style: Theme.of(context).textTheme.headlineMedium,
@@ -66,6 +67,13 @@ class _AuthScreen extends StatelessWidget {
                       SubmitButton(cubit: cubit, state: state),
                   
                       const SizedBox(height: 16),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Need a different theme?"),
+                          ThemeSwitchIcon(),
+                        ],
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -78,6 +86,7 @@ class _AuthScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+
                     ],
                   ),
                 ),

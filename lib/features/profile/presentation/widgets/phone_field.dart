@@ -10,12 +10,13 @@ class PhoneField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = phoneNumber ?? '';
     return TextFormField(
       controller: controller,
       enabled: true,
       keyboardType: TextInputType.phone,
       style: TextStyle(
-        color: Colors.grey.shade800,
+        color: Colors.grey.shade600,
       ),
       decoration: InputDecoration(
         labelText: phoneLabel,

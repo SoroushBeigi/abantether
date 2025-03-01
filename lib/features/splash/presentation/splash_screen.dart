@@ -5,6 +5,7 @@ import 'package:abantether/features/splash/presentation/cubit/cubit/splash_cubit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -32,22 +33,19 @@ class _SplashScreen extends StatelessWidget {
             navigateToHome: () => context.go('/home'),
             error: (error) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(error ?? const UnknownFailure().message)),
+                SnackBar(
+                    content: Text(error ?? const UnknownFailure().message)),
               );
             },
           );
         },
-        child: const Center(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.account_balance_wallet,
-                size: 100,
-                color: Colors.white,
-              ),
-              SizedBox(height: 20),
-              Text(
+              Lottie.asset(splashLottiePath),
+              const SizedBox(height: 20),
+              const Text(
                 appName,
                 style: TextStyle(
                   fontSize: 32,
