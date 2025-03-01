@@ -17,15 +17,15 @@
 1. **Clone the repository**:  
    ```bash  
    git clone https://github.com/your-username/your-repo-name.git  
-   cd your-repo-name```
+   cd your-repo-name
  2. **Install dependencies:**:  
    ```bash  
-   flutter pub get```
+   flutter pub get
  3. **Run the app:**:  
    ```bash  
-   flutter run```
+   flutter run
 
-##🏗️ Architecture & State Management
+## 🏗️ Architecture & State Management
 This app follows **Clean Architecture** to enforce separation of concerns, scalability, and testability. Here’s the breakdown:  
 
 1. **Cubit (Bloc)**:  
@@ -57,9 +57,9 @@ This app follows **Clean Architecture** to enforce separation of concerns, scala
 - Mappers for models and entities used to minimize layers dependency and coupling
 - Widgets were separated to smaller reusable widgets for code readability and performance
 - Final values and const widgets/class constructors used for minimal rebuilds and performance improvemenets
-- 
+- Added app_constants file for consistency and maintainability
 
-##**Additional features:**
+## **Additional features:**
 - **Dark/Light theme**: ThemeCubit implemented to change app theme globally. a const ThemeSwitch widget was created to handle theme changes across the app
 - **Secure token storage**: Used flutter_secure_storage for storing sensitive data.  
 - **Modern UI and animations**: Implemented splash screen, used lottie for performant and beautiful animations, flutter animations for modern looks and smooth page transitions
