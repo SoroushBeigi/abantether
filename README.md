@@ -15,15 +15,12 @@
 
 ### Option 2: Build from Source  
 1. **Clone the repository**:  
-   ```bash  
-   git clone https://github.com/your-username/your-repo-name.git  
-   cd your-repo-name
+   ```git clone https://github.com/your-username/your-repo-name.git  
+   cd abantether```
  2. **Install dependencies:**:  
-   ```bash  
-   flutter pub get
+   ```flutter pub get```
  3. **Run the app:**:  
-   ```bash  
-   flutter run
+   ```flutter run```
 
 ## 🏗️ Architecture & State Management
 This app follows **Clean Architecture** to enforce separation of concerns, scalability, and testability. Here’s the breakdown:  
