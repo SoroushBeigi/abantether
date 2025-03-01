@@ -29,3 +29,14 @@ const String editTooltip = 'Edit';
 
 const String loginLottiePath = 'assets/lottie/login.json';
 const String splashLottiePath = 'assets/lottie/splash.json';
+
+const String needTheme = 'Need a different theme?';
+const String dontHaveAccount = 'Don\'t have an account?';
+const String signUp = 'Sign Up';
+const String welcomeBack = 'Welcome Back';
+const String serverFailureErr = 'Server error occurred';
+const String clientFailureErr = 'Client error occurred';
+const String unknownFailureErr = 'Unknown error occurred';
+const String dbFailureErr = 'Something went wrong with local database';
+const String networkFailureErr = 'Network error occurred';
+

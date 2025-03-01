@@ -20,8 +20,6 @@ abstract class NetworkModule {
     maxWidth: 120,
   );
 
-
-  
   @Named('authDio') 
   @singleton
   Dio get authDio => _createDio(

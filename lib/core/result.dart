@@ -1,3 +1,5 @@
+import 'constants/app_constants.dart';
+
 sealed class Result<T> {
   const Result();
 
@@ -29,23 +31,23 @@ abstract class Failure {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure() : super('Server error occurred');
+  const ServerFailure() : super(serverFailureErr);
 }
 
 class ClientFailure extends Failure {
-  const ClientFailure() : super('Client error occurred');
+  const ClientFailure() : super(clientFailureErr);
 }
 
 class UnknownFailure extends Failure {
-  const UnknownFailure() : super('Unknown error occurred');
+  const UnknownFailure() : super(unknownFailureErr);
 }
 
 class DatabaseFailure extends Failure {
-  const DatabaseFailure() : super('Something went wrong with local database');
+  const DatabaseFailure() : super(dbFailureErr);
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure() : super('Network error occurred');
+  const NetworkFailure() : super(networkFailureErr);
 }
 
 class CustomFailure extends Failure{

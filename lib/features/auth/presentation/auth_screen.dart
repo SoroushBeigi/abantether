@@ -42,8 +42,9 @@ class _AuthScreen extends StatelessWidget {
               }
 
               if (state.status == LoginStatus.error) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text((state.errorMessage ?? const UnknownFailure().message))));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text((state.errorMessage ??
+                        const UnknownFailure().message))));
               }
             },
             builder: (context, state) {
@@ -54,9 +55,10 @@ class _AuthScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Lottie.asset(loginLottiePath,height: MediaQuery.sizeOf(context).height*0.3),
+                      Lottie.asset(loginLottiePath,
+                          height: MediaQuery.sizeOf(context).height * 0.3),
                       Text(
-                        'Welcome Back',
+                        welcomeBack,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 32),
@@ -65,28 +67,26 @@ class _AuthScreen extends StatelessWidget {
                       PasswordInput(cubit: cubit, state: state),
                       const SizedBox(height: 24),
                       SubmitButton(cubit: cubit, state: state),
-                  
                       const SizedBox(height: 16),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Need a different theme?"),
+                          Text(needTheme),
                           ThemeSwitchIcon(),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account?"),
+                          const Text(dontHaveAccount),
                           TextButton(
                             onPressed: () {
                               //Mock button, no signup feature
                             },
-                            child: const Text('Sign Up'),
+                            child: const Text(signUp),
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),

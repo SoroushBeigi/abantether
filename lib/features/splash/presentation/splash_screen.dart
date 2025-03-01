@@ -29,8 +29,8 @@ class _SplashScreen extends StatelessWidget {
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           state.whenOrNull(
-            navigateToAuth: () => context.go('/auth'),
-            navigateToHome: () => context.go('/home'),
+            navigateToAuth: () => context.go(authPath),
+            navigateToHome: () => context.go(homePath),
             error: (error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
