@@ -1,6 +1,7 @@
 import 'package:abantether/features/profile/domain/entities/user_entity.dart';
 import 'package:abantether/features/profile/domain/usecases/get_user_usecase.dart';
 import 'package:abantether/features/profile/domain/usecases/update_user_usecase.dart';
+import 'package:abantether/features/profile/domain/validators/profile_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -28,6 +29,14 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> updateUser({required int id, required String phoneNumber}) async {
+    final String? validationError =ProfileValidator.validatePhoneNumber(phoneNumber);
+    final currentState = state;
+    if(validationError!=null){
+      emit(ProfileState.error(error: validationError));
+      emit(currentState);
+      return;
+    }
+
     emit(const ProfileState.loading());
     final result = await _getUserUsecase();
     result.fold(

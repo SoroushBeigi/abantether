@@ -24,7 +24,9 @@ class _ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
     return Scaffold(
-      appBar: AppBar(title: const Text(profileTitle),),
+      appBar: AppBar(
+        title: const Text(profileTitle),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Center(
@@ -38,7 +40,12 @@ class _ProfileScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: BlocConsumer<ProfileCubit, ProfileState>(
-                  listener: (context, state) {},
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      error: (error) => ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(error ?? ''))),
+                    );
+                  },
                   builder: (context, state) {
                     return state.whenOrNull(
                           loading: () => const Center(
@@ -62,7 +69,8 @@ class _ProfileScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 24),
                               _buildEditablePhoneField(
-                                  phoneNumber: user.phoneNumber ?? '', controller: phoneController),
+                                  phoneNumber: user.phoneNumber ?? '',
+                                  controller: phoneController),
                               const SizedBox(height: 32),
                               _buildSaveButton(
                                   onPressed: () => cubit.updateUser(
@@ -142,8 +150,9 @@ class _ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEditablePhoneField({String? phoneNumber, required TextEditingController controller}) {
-    controller.text=phoneNumber??'';
+  Widget _buildEditablePhoneField(
+      {String? phoneNumber, required TextEditingController controller}) {
+    controller.text = phoneNumber ?? '';
     return TextFormField(
       controller: controller,
       enabled: true,
