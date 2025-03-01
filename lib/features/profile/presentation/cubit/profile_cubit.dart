@@ -6,20 +6,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/entities/update_user_entity.dart';
+
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
-  final GetUserUsecase _getUserUsecase;
-  final UpdateUserUsecase _updateUserUsecase;
-  ProfileCubit(this._getUserUsecase, this._updateUserUsecase) : super(const ProfileState.initial()) {
+  final GetUserUseCase _getUserUseCase;
+  final UpdateUserUseCase _updateUserUseCase;
+  ProfileCubit(this._getUserUseCase, this._updateUserUseCase) : super(const ProfileState.initial()) {
     Future.microtask(() => getUserInfo());
   }
 
   Future<void> getUserInfo() async {
     emit(const ProfileState.loading());
-    final result = await _getUserUsecase();
+    final result = await _getUserUseCase();
     result.fold(
       onSuccess: (data) {
         emit(ProfileState.success(user: data));
@@ -38,7 +40,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
 
     emit(const ProfileState.loading());
-    final result = await _getUserUsecase();
+    final result = await _updateUserUseCase(UpdateUser(id: id,phoneNumber: phoneNumber));
     result.fold(
       onSuccess: (data) {
         final newUser = data.copyWith(phoneNumber: phoneNumber);

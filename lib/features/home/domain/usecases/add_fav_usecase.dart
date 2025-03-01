@@ -6,8 +6,8 @@ import 'package:abantether/features/home/domain/repositories/home_repository.dar
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class AddFavUsecase extends BaseUseCase<Result<Fav>, AddFav> {
-  AddFavUsecase(this._homeRepository);
+class AddFavUseCase extends BaseUseCase<Result<Fav>, AddFav> {
+  AddFavUseCase(this._homeRepository);
 
   final HomeRepository _homeRepository;
 

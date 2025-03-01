@@ -1,4 +1,3 @@
-import 'package:abantether/features/auth/data/models/auth_model.dart';
 import 'package:abantether/features/profile/data/models/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';

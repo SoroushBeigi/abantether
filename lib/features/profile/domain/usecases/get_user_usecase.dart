@@ -5,8 +5,8 @@ import 'package:abantether/features/profile/domain/repositories/profile_reposito
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class GetUserUsecase extends BaseUseCaseNoArgs<Result<User>> {
-  GetUserUsecase(this._profileRepository);
+class GetUserUseCase extends BaseUseCaseNoArgs<Result<User>> {
+  GetUserUseCase(this._profileRepository);
 
   final ProfileRepository _profileRepository;
 

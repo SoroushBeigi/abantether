@@ -80,16 +80,22 @@ _i174.GetIt $initGetIt(
       () => _i474.AuthService(gh<_i361.Dio>(instanceName: 'authDio')));
   gh.lazySingleton<_i581.ProfileService>(
       () => _i581.ProfileService(gh<_i361.Dio>(instanceName: 'authDio')));
-  gh.lazySingleton<_i376.AddFavUsecase>(
-      () => _i376.AddFavUsecase(gh<_i66.HomeRepository>()));
-  gh.lazySingleton<_i918.GetCoinsUsecase>(
-      () => _i918.GetCoinsUsecase(gh<_i66.HomeRepository>()));
-  gh.lazySingleton<_i457.GetFavsUsecase>(
-      () => _i457.GetFavsUsecase(gh<_i66.HomeRepository>()));
-  gh.lazySingleton<_i524.RemoveFavUsecase>(
-      () => _i524.RemoveFavUsecase(gh<_i66.HomeRepository>()));
-  gh.lazySingleton<_i386.ProfileRepository>(
-      () => _i13.ProfileRepositoryImpl(gh<_i581.ProfileService>()));
+  gh.lazySingleton<_i386.ProfileRepository>(() => _i13.ProfileRepositoryImpl(
+        gh<_i581.ProfileService>(),
+        gh<_i377.KeyValueLocalDataSource>(),
+      ));
+  gh.lazySingleton<_i376.AddFavUseCase>(
+      () => _i376.AddFavUseCase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i918.GetCoinsUseCase>(
+      () => _i918.GetCoinsUseCase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i457.GetFavsUseCase>(
+      () => _i457.GetFavsUseCase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i524.RemoveFavUseCase>(
+      () => _i524.RemoveFavUseCase(gh<_i66.HomeRepository>()));
+  gh.lazySingleton<_i773.GetUserUseCase>(
+      () => _i773.GetUserUseCase(gh<_i386.ProfileRepository>()));
+  gh.lazySingleton<_i982.UpdateUserUseCase>(
+      () => _i982.UpdateUserUseCase(gh<_i386.ProfileRepository>()));
   gh.lazySingleton<_i103.SplashRepository>(
       () => _i1010.SplashRepositoryImpl(gh<_i377.KeyValueLocalDataSource>()));
   gh.lazySingleton<_i869.AuthRepository>(() => _i570.AuthRepositoryImpl(
@@ -97,21 +103,17 @@ _i174.GetIt $initGetIt(
         gh<_i377.KeyValueLocalDataSource>(),
       ));
   gh.factory<_i1017.HomeCubit>(() => _i1017.HomeCubit(
-        gh<_i918.GetCoinsUsecase>(),
-        gh<_i376.AddFavUsecase>(),
-        gh<_i524.RemoveFavUsecase>(),
-        gh<_i457.GetFavsUsecase>(),
+        gh<_i918.GetCoinsUseCase>(),
+        gh<_i376.AddFavUseCase>(),
+        gh<_i524.RemoveFavUseCase>(),
+        gh<_i457.GetFavsUseCase>(),
       ));
-  gh.lazySingleton<_i773.GetUserUsecase>(
-      () => _i773.GetUserUsecase(gh<_i386.ProfileRepository>()));
-  gh.lazySingleton<_i982.UpdateUserUsecase>(
-      () => _i982.UpdateUserUsecase(gh<_i386.ProfileRepository>()));
+  gh.factory<_i300.ProfileCubit>(() => _i300.ProfileCubit(
+        gh<_i773.GetUserUseCase>(),
+        gh<_i982.UpdateUserUseCase>(),
+      ));
   gh.lazySingleton<_i482.GetTokenUseCase>(
       () => _i482.GetTokenUseCase(gh<_i103.SplashRepository>()));
-  gh.factory<_i300.ProfileCubit>(() => _i300.ProfileCubit(
-        gh<_i773.GetUserUsecase>(),
-        gh<_i982.UpdateUserUsecase>(),
-      ));
   gh.lazySingleton<_i406.LoginUseCase>(
       () => _i406.LoginUseCase(gh<_i869.AuthRepository>()));
   gh.factory<_i371.SplashCubit>(

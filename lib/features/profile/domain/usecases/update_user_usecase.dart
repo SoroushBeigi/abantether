@@ -6,8 +6,8 @@ import 'package:abantether/features/profile/domain/repositories/profile_reposito
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class UpdateUserUsecase extends BaseUseCase<Result<User>, UpdateUser> {
-  UpdateUserUsecase(this._profileRepository);
+class UpdateUserUseCase extends BaseUseCase<Result<User>, UpdateUser> {
+  UpdateUserUseCase(this._profileRepository);
 
   final ProfileRepository _profileRepository;
 

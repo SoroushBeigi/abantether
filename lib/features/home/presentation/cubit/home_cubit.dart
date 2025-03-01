@@ -7,7 +7,7 @@ import 'package:abantether/features/home/domain/usecases/add_fav_usecase.dart';
 import 'package:abantether/features/home/domain/usecases/get_coins_usecase.dart';
 import 'package:abantether/features/home/domain/usecases/get_favs_usecase.dart';
 import 'package:abantether/features/home/domain/usecases/remove_fav_usecase.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,18 +16,18 @@ part 'home_cubit.freezed.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  final GetCoinsUsecase _getCoinsUsecase;
-  final AddFavUsecase _addFavUsecase;
-  final RemoveFavUsecase _removeFavUsecase;
-  final GetFavsUsecase _getFavsUsecase;
+  final GetCoinsUseCase _getCoinsUseCase;
+  final AddFavUseCase _addFavUseCase;
+  final RemoveFavUseCase _removeFavUseCase;
+  final GetFavsUseCase _getFavsUseCase;
 
   List<Fav> favList = [];
 
   HomeCubit(
-    this._getCoinsUsecase,
-    this._addFavUsecase,
-    this._removeFavUsecase,
-    this._getFavsUsecase,
+    this._getCoinsUseCase,
+    this._addFavUseCase,
+    this._removeFavUseCase,
+    this._getFavsUseCase,
   ) : super(const HomeState.initial()) {
     Future.microtask(() => loadCoinsAndFavs());
   }
@@ -42,7 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     if (isLiked) {
       final favId = favList.firstWhere((element) => element.cryptoId == coinId).id;
-      final removeFavResult = await _removeFavUsecase(RemoveFav(favId: favId));
+      final removeFavResult = await _removeFavUseCase(RemoveFav(favId: favId));
       removeFavResult.fold(
         onSuccess: (data) {
           final updatedCoins = coins.map((e) => e.id == coinId ? e.copyWith(isFavorite: false) : e).toList();
@@ -51,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
         onError: (failure) => emit(HomeState.error(error: failure.message)),
       );
     } else {
-      final addFavResult = await _addFavUsecase(AddFav(cryptoId: coinId));
+      final addFavResult = await _addFavUseCase(AddFav(cryptoId: coinId));
       addFavResult.fold(
         onSuccess: (data) {
           final updatedCoins = coins.map((e) => e.id == coinId ? e.copyWith(isFavorite: true) : e).toList();
@@ -65,8 +65,8 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> loadCoinsAndFavs() async {
     emit(const HomeState.loading());
     final results = await Future.wait([
-      _getCoinsUsecase(),
-      _getFavsUsecase(),
+      _getCoinsUseCase(),
+      _getFavsUseCase(),
     ]);
     final coinsResult = results[0] as Result<List<Coin>>;
     final favsResult = results[1] as Result<List<Fav>>;
