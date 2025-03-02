@@ -52,11 +52,13 @@ This app follows **Clean Architecture** to enforce separation of concerns, scala
 - **Scalability**: New features can be added without breaking existing logic. 
 
 ### **Example of choices:**
-- Using two different @Named Dio instances seemes enough for the scale of this project, but DioFactory to create different instances based on different baseUrls could be a possible choice for bigger projects.
+- Implemented abstract classes in pure dart like KeyValueLocalDataSource for layers loose coupling, ability to switch between different implementations easily and improved testability
 - Mappers for models and entities used to minimize layers dependency and coupling
+- Using two different @Named Dio instances seemes enough for the scale of this project, but DioFactory to create different instances based on different baseUrls could be a possible choice for bigger projects.
 - Widgets were separated to smaller reusable widgets for code readability and performance
 - Final values and const widgets/class constructors used for minimal rebuilds and performance improvemenets
 - Added app_constants file for consistency and maintainability
+
 
 ## **Additional features:**
 - **Dark/Light theme**: ThemeCubit implemented to change app theme globally. a const ThemeSwitch widget was created to handle theme changes across the app
